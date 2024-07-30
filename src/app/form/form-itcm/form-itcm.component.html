@@ -1,0 +1,626 @@
+<h1 class="py-3 text-center text-3xl font-semibold text-gray-800">Form ITCM</h1>
+<div class="flex w-full pb-4 px-2 bg-white">
+  <label for="table-search" class="sr-only">Search</label>
+  <div class="relative">
+    <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+      <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <input type="text" id="table-search"
+      class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 md:w-64 sm:w-40 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Search for items">
+  </div>
+  <button type="button" (click)="openAddModal()" *ngIf="role_code === 'A' || role_code === 'M'"
+    class="ml-auto text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-2 py-1 md:px-5 md:py-2.5 text-center inline-flex items-center">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden md:block"
+      stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 5.25v13.5"></path>
+      <path d="M18.75 12H5.25"></path>
+    </svg>
+    <span>Add Form</span>
+  </button>
+</div>
+<div class="relative py-2 overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex flex-col overflow-y-scroll h-[68vh]">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-100">
+        <tr>
+          <!-- <th scope="col" class="p-4">
+          <div class="flex items-center">
+            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+            <label for="checkbox-all-search" class="sr-only">checkbox</label>
+          </div>
+        </th> -->
+          <th scope="col" class="px-6 py-3">No.</th>
+          <th scope="col" class="px-6 py-3">No. Formulir</th>
+          <th scope="col" class="px-6 py-3">No. Ticket</th>
+          <th scope="col" class="px-6 py-3">Dokumen</th>
+          <th scope="col" class="px-6 py-3">Projek</th>
+          <th scope="col" class="px-6 py-3">Manajer</th>
+          <th scope="col" class="px-6 py-3">Status</th>
+          <th scope="col" class="px-6 py-3">Approval Status</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="role_code === 'SA'">
+        <tr *ngFor="let itemFormITCM of dataListFormITCM let x = index" class="bg-white border-b hover:bg-gray-50">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ x+1 }}</th>
+          <td class="px-6 py-4">{{ itemFormITCM.form_number }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.form_ticket }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.document_name }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.project_name }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.project_manager }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.form_status }}</td>
+          <td class="px-6 py-4">{{ itemFormITCM.approval_status }}</td>
+          <td class="px-6 py-4 ">
+              <!-- <button type="button" (click)="openEditModal(itemFormITCM.form_uuid)"
+                class="w-full focus:outline-none text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
+                  <path d="M9 14.996h3l8.5-8.5a2.121 2.121 0 0 0-3-3l-8.5 8.5v3Z"></path>
+                  <path d="m16 5 3 3"></path>
+                </svg>
+              </button>
+            <br> -->
+              <button type="button" (click)="openApproveModal(itemFormITCM.form_uuid)"
+                class="w-full focus:outline-none text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-teal-300  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                  <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path>
+                  <path d="m9 15 2 2 4-4"></path>
+                </svg>
+              </button>
+            <!-- <br>
+              <button type="button" (click)="onDeleteFormITCM(itemFormITCM.form_uuid)"
+                class="w-full focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="m5.25 5.25.938 15c.044.867.675 1.5 1.5 1.5h8.625c.828 0 1.447-.633 1.5-1.5l.937-15"></path>
+                  <path d="M3.75 5.25h16.5"></path>
+                  <path d="M9 5.25V3.375a1.122 1.122 0 0 1 1.125-1.125h3.75A1.121 1.121 0 0 1 15 3.375V5.25"></path>
+                  <path d="M12 8.25v10.5"></path>
+                  <path d="M8.625 8.25 9 18.75"></path>
+                  <path d="M15.375 8.25 15 18.75"></path>
+                </svg>
+              </button> -->
+          </td>
+        </tr>
+        </ng-container>
+
+        <ng-container *ngIf="role_code === 'A'">
+          <tr *ngFor="let itemFormITCM of dataListFormAdminITCM let x = index" class="bg-white border-b hover:bg-gray-50">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ x+1 }}</th>
+            <td class="px-6 py-4">{{ itemFormITCM.form_number }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.form_ticket }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.document_name }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.project_name }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.project_manager }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.form_status }}</td>
+            <td class="px-6 py-4">{{ itemFormITCM.approval_status }}</td>
+            <td class="px-6 py-4 ">
+                <button type="button" (click)="openEditModal(itemFormITCM.form_uuid)"
+                  class="w-full focus:outline-none text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
+                    <path d="M9 14.996h3l8.5-8.5a2.121 2.121 0 0 0-3-3l-8.5 8.5v3Z"></path>
+                    <path d="m16 5 3 3"></path>
+                  </svg>
+                </button>
+              <br>
+                <button type="button" (click)="openApproveModal(itemFormITCM.form_uuid)"
+                  class="w-full focus:outline-none text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-teal-300  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                    <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path>
+                    <path d="m9 15 2 2 4-4"></path>
+                  </svg>
+                </button>
+              <br>
+                <button type="button" (click)="onDeleteFormITCM(itemFormITCM.form_uuid)"
+                  class="w-full focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="m5.25 5.25.938 15c.044.867.675 1.5 1.5 1.5h8.625c.828 0 1.447-.633 1.5-1.5l.937-15"></path>
+                    <path d="M3.75 5.25h16.5"></path>
+                    <path d="M9 5.25V3.375a1.122 1.122 0 0 1 1.125-1.125h3.75A1.121 1.121 0 0 1 15 3.375V5.25"></path>
+                    <path d="M12 8.25v10.5"></path>
+                    <path d="M8.625 8.25 9 18.75"></path>
+                    <path d="M15.375 8.25 15 18.75"></path>
+                  </svg>
+                </button>
+            </td>
+          </tr>
+          </ng-container>
+
+          <ng-container *ngIf="role_code === 'M'">
+            <tr *ngFor="let itemFormITCM of dataListFormUserITCM let x = index" class="bg-white border-b hover:bg-gray-50">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ x+1 }}</th>
+              <td class="px-6 py-4">{{ itemFormITCM.form_number }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.form_ticket }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.document_name }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.project_name }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.project_manager }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.form_status }}</td>
+              <td class="px-6 py-4">{{ itemFormITCM.approval_status }}</td>
+              <td class="px-6 py-4 ">
+                  <button type="button" (click)="openEditModal(itemFormITCM.form_uuid)"
+                    class="w-full focus:outline-none text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"></path>
+                      <path d="M9 14.996h3l8.5-8.5a2.121 2.121 0 0 0-3-3l-8.5 8.5v3Z"></path>
+                      <path d="m16 5 3 3"></path>
+                    </svg>
+                  </button>
+                <br>
+                  <button type="button" (click)="openApproveModal(itemFormITCM.form_uuid)"
+                    class="w-full focus:outline-none text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-teal-300  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                      <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path>
+                      <path d="m9 15 2 2 4-4"></path>
+                    </svg>
+                  </button>
+                <br>
+                  <button type="button" (click)="onDeleteFormITCM(itemFormITCM.form_uuid)"
+                    class="w-full focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
+                      stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="m5.25 5.25.938 15c.044.867.675 1.5 1.5 1.5h8.625c.828 0 1.447-.633 1.5-1.5l.937-15"></path>
+                      <path d="M3.75 5.25h16.5"></path>
+                      <path d="M9 5.25V3.375a1.122 1.122 0 0 1 1.125-1.125h3.75A1.121 1.121 0 0 1 15 3.375V5.25"></path>
+                      <path d="M12 8.25v10.5"></path>
+                      <path d="M8.625 8.25 9 18.75"></path>
+                      <path d="M15.375 8.25 15 18.75"></path>
+                    </svg>
+                  </button>
+              </td>
+            </tr>
+            </ng-container>
+    
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ADD MODAL -->
+<div *ngIf="isModalAddOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative p w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex items-center justify-between p-4 border-b rounded-t bg-white dark:border-gray-600">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        Tambah
+      </h3>
+      <button (click)="closeAddModal()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form #addITCMForm="ngForm" (ngSubmit)="addFormITCM()" class="p-6">`
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="mb-4 text-gray-600">Masukkan informasi form ITCM yg ingin anda tambahkan</p>
+      
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base mb-1">No. Tiket</label>
+        <input type="text" name="form_ticket" placeholder="Masukkan Nomer Tiket"
+        [(ngModel)]="form_ticket" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base mb-1">Pilih Projek</label>
+        <select id="projectSelect" name="project_uuid" id="" class="form-select" [(ngModel)]="project_uuid"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Pilih Projek</option>
+          <option *ngFor="let project of dataListProject" [value]="project.project_uuid">{{ project.project_name}}</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base mb-1">No. DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="Masukkan Nomor DA" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base mb-1">Nama Pemohon</label>
+        <input type="text" name="nama_pemohon" placeholder="Masukkan Nama Pemohon"
+        [(ngModel)]="nama_pemohon" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base mb-1">Instansi</label>
+        <input type="text" name="instansi" placeholder="Masukkan Nama instansi" [(ngModel)]="instansi" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="date" class="text-sm md:text-base mb-1">Tanggal</label>
+        <input type="date" name="tanggal" [(ngModel)]="tanggal" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base mb-1">Perubahan Aset</label>
+        <input type="text" name="perubahan_aset" placeholder="Masukkan Perubahan Aset" [(ngModel)]="perubahan_aset" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="description" class="text-sm md:text-base mb-1">Deskripsi</label>
+        <textarea name="deskripsi" placeholder="Masukkan deskripsi" [(ngModel)]="deskripsi" cols="30" rows="3" class="border text-sm rounded-xl p-2 px-3 w-full"></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div  class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base mb-1">Pemohon</label>
+        <select id="recipientSelect1" name="name1" id="" class="form-select" [(ngModel)]="name1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Pilih Person</option>
+          <option *ngFor="let user of dataListAllUser" [value]="user.user_id">{{ user.personal_name }}</option>
+        </select>
+        <input type="text" placeholder="Masukkan Jabatan" [(ngModel)]="position1" name="name1-position" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base mb-1">Atasan Pemohon</label>
+        <select id="recipientSelect2" name="name2" id="" class="form-select" [(ngModel)]="name2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Pilih Person</option>
+          <option *ngFor="let user of dataListAllUser" [value]="user.user_id">{{ user.personal_name }}</option>
+        </select>
+        <input type="text" placeholder="Masukkan Jabatan" [(ngModel)]="position2" name="name2-position" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base mb-1">Penerima</label>
+        <select id="recipientSelect3" name="name3" id="" class="form-select" [(ngModel)]="name3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Pilih Person</option>
+          <option *ngFor="let user of dataListAllUser" [value]="user.user_id">{{ user.personal_name }}</option>
+        </select>
+        <input type="text" placeholder="Masukkan Jabatan" [(ngModel)]="position3" name="name3-position" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base mb-1">Atasan Penerima</label>
+        <select id="recipientSelect4" name="name4" id="" class="form-select" [(ngModel)]="name4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Pilih Person</option>
+          <option *ngFor="let user of dataListAllUser" [value]="user.user_id">{{ user.personal_name }}</option>
+        </select>
+        <input type="text" placeholder="Masukkan Jabatan" [(ngModel)]="position4" name="name4-position" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <!-- <div  class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div> -->
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <button (click)="addFormITCM()"  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+      <button (click)="addFormITCM()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit MODAL -->
+<div *ngIf="isModalEditOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative p w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex items-center justify-between p-4 border-b rounded-t bg-white dark:border-gray-600">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        Edit
+      </h3>
+      <button (click)="closeEditModal()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form action="" class="p-6">
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="mb-4 text-gray-600">Masukkan informasi form ITCM yg ingin anda tambahkan</p>
+      
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base mb-1">No. Tiket</label>
+        <input type="text" name="ticketNo" id="ticketNo" placeholder="Masukkan Nomor Tiket" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base mb-1">Pilih Projek</label>
+        <select id="projectSelect"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Pilih Projek</option>
+          <option value="Project1">Project 1</option>
+          <option value="Project2">Project 2</option>
+          <option value="Project3">Project 3</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base mb-1">No. DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="Masukkan Nomor DA" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base mb-1">Nama Pemohon</label>
+        <input type="text" name="applicantName" id="applicantName" placeholder="Masukkan Nama Pemohon"
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base mb-1">Instansi</label>
+        <input type="text" name="agency" id="agency" placeholder="Masukkan Nama Instansi" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="date" class="text-sm md:text-base mb-1">Tanggal</label>
+        <input type="date" name="date" id="date" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base mb-1">Perubahan Aset</label>
+        <input type="text" name="assetChange" id="assetChange" placeholder="Masukkan Perubahan Aset" class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="description" class="text-sm md:text-base mb-1">Deskripsi</label>
+        <textarea name="description" id="description" cols="30" rows="3" placeholder="Masukkan Deskripsi"
+          class="border text-sm rounded-xl p-2 px-3 w-full"></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div  class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo1" id="recipientInfo1" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo2" id="recipientInfo2" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo3" id="recipientInfo3" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo4" id="recipientInfo4" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full">
+      </div>
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <button  type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+      <button (click)="closeEditModal()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Approve MODAL -->
+<div *ngIf="isModalApproveOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative p w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex items-center justify-between p-4 border-b rounded-t bg-white dark:border-gray-600">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        Approve
+      </h3>
+      <button (click)="closeApproveModal()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form action="" class="p-6">
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="mb-4 text-gray-600">Masukkan informasi form ITCM yg ingin anda tambahkan</p>
+      
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base mb-1">No. Tiket</label>
+        <input type="text" name="ticketNo" id="ticketNo" placeholder="Masukkan Nomor Tiket" class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base mb-1">Pilih Projek</label>
+        <select id="projectSelect"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Pilih Projek</option>
+          <option value="Project1">Project 1</option>
+          <option value="Project2">Project 2</option>
+          <option value="Project3">Project 3</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base mb-1">No. DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="Masukkan Nomor DA" class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base mb-1">Nama Pemohon</label>
+        <input type="text" name="applicantName" id="applicantName" placeholder="Masukkan Nama Pemohon"
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base mb-1">Instansi</label>
+        <input type="text" name="agency" id="agency" placeholder="Masukkan Nama Instansi" class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="date" class="text-sm md:text-base mb-1">Tanggal</label>
+        <input type="date" name="date" id="date" class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base mb-1">Perubahan Aset</label>
+        <input type="text" name="assetChange" id="assetChange" placeholder="Masukkan Perubahan Aset" class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="description" class="text-sm md:text-base mb-1">Deskripsi</label>
+        <textarea name="description" id="description" cols="30" rows="3" placeholder="Masukkan Deskripsi"
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div  class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo1" id="recipientInfo1" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo2" id="recipientInfo2" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo3" id="recipientInfo3" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo4" id="recipientInfo4" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+
+      <div  class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base mb-1">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border text-sm rounded-xl p-2 px-3 w-full cursor-not-allowed" disabled>
+      </div>
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <button  type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+      <button (click)="closeApproveModal()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
+  </div>
+</div>
