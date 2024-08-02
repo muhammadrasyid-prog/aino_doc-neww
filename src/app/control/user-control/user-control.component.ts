@@ -10,6 +10,7 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../services/user-service/user-service.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -91,12 +92,14 @@ export class UserControlComponent implements OnInit {
     private fb: FormBuilder,
     private datePipe: DatePipe,
     private formGroupDirective: FormGroupDirective,
+    private router: Router,
     public userService: UserService
   ) {
     this.apiUrl = apiUrl;
   }
 
   userList: Users[] = [];
+  role_code: string = '';
 
   ngOnInit(): void {
     this.fetchDataUser();
@@ -127,6 +130,28 @@ export class UserControlComponent implements OnInit {
     this.appData();
     this.roleData();
     this.divisionData();
+    // this.checkAccess();
+  }
+
+  checkAccess(): void {
+    const token = this.cookieService.get('userToken');
+
+    axios
+      .get(`${this.apiUrl}/auth/my/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        this.role_code = response.data.role_code;
+        if (this.role_code !== 'SA') {
+          this.router.navigate(['/not-found']);
+        } 
+      })
+      .catch(error => {
+        console.log(error);
+        this.router.navigate(['/not-found']);
+      });
   }
 
   substractYearsToDate(auxDate: Date, years: number): Date {

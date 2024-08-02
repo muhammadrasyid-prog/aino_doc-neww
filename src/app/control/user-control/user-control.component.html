@@ -10,7 +10,7 @@
           clip-rule="evenodd"></path>
       </svg>
     </div>
-    <input type="text" id="table-search"
+    <input type="text" id="table-search" [(ngModel)]="searchText" name="searchText"
       class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 md:w-64 sm:w-40 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
       placeholder="Search for items">
   </div>
@@ -103,7 +103,7 @@
     <!-- Modal body -->
     <form action="" class="p-6">
       <h3 class="text-2xl text-gray-900 font-semibold">User Controll!</h3>
-      <p class="text-gray-600">Masukkan informasi user yangg ingin anda tambahkan</p>
+      <p class="text-gray-600">Masukkan informasi user yang ingin anda tambahkan</p>
 
       <div class="mt-4">
         <label for="userName" class="text-sm md:text-base">User Name</label>
@@ -203,7 +203,7 @@
     <!-- Modal header -->
     <div class="sticky top-0 flex bg-white items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
       <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Tambah
+        Edit
       </h3>
       <button (click)="closeEditModal()"
         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -217,7 +217,7 @@
     <!-- Modal body -->
     <form action="" class="p-6">
       <h3 class="text-2xl text-gray-900 font-semibold">User Control!</h3>
-      <p class="text-gray-600">Masukkan informasi user yangg ingin anda tambahkan</p>
+      <p class="text-gray-600">Masukkan informasi user yang ingin anda perbarui</p>
 
       <div class="mt-4">
         <label for="userName" class="text-sm md:text-base">User Name</label>
@@ -273,20 +273,21 @@
 
       <div class="mt-4">
         <label for="aplikasi" class="text-sm md:text-base">Aplikasi</label>
-        <select id="aplikasi" data-test="select_application" aria-label="Select Application" 
-        name="application_uuid" [(ngModel)]="application_uuid" (change)="onApplicationChange()"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Pilih Aplikasi</option>
-          <option *ngFor="let app of dataListApplication" [value]="app.application_uuid">{{ app.application_title }}</option>
+        <select id="aplikasi" data-test="select_application" aria-label="Select Application" name="application_uuid"
+          [(ngModel)]="form.value.application_uuid" (change)="onApplicationChange()"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" selected>Pilih Aplikasi</option>
+          <option *ngFor="let app of dataListApplication" [value]="app.application_uuid">{{ app.application_title }}
+          </option>
         </select>
       </div>
 
       <div class="mt-4">
         <label for="role" class="text-sm md:text-base">Role</label>
-        <select id="role" aria-label="Select Role" data-test="select_role"
-        [(ngModel)]="form.value.role_uuid" name="roleUuid"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Pilih Role</option>
+        <select id="role" aria-label="Select Role" data-test="select_role" [(ngModel)]="form.value.role_uuid"
+          name="roleUuid"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" selected>Pilih Role</option>
           <option *ngFor="let role of dataListRole" [value]="role.role_uuid">{{ role.role_title }}</option>
         </select>
       </div>

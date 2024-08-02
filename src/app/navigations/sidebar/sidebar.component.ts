@@ -28,7 +28,7 @@ export class SidebarComponent {
 
   ngOnInit() {
     this.fetchProfileData();
-    console.log('psdvzv',this.role_code)
+    // console.log('psdvzv',this.role_code)
     console.log(this.apiUrl);
     
   } 
@@ -54,5 +54,8 @@ export class SidebarComponent {
         console.log(error);
       });
   }
-  
-} 
+
+  isUserControlVisible(): boolean {
+    return this.role_code === 'SA';
+  }
+}

@@ -22,6 +22,7 @@ import { DivisionComponent } from './control/division/division.component';
 import { AccessGroupComponent } from './control/access-group/access-group.component';
 import { AuthorityComponent } from './control/authority/authority.component';
 import { AuthGuard } from './auth/auth-guard.guard';
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -82,7 +83,8 @@ export const routes: Routes = [
         path: 'user',
         children: [
           { path: 'profile', component: ProfileComponent },
-          { path: 'favorite', component: FavoriteComponent },
+          // { path: 'favorite', component: FavoriteComponent },
+          { path: 'change-password', component: ChangePasswordComponent },
         ]
       },
     ]

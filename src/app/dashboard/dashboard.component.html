@@ -1,60 +1,108 @@
 <!-- component -->
-<div class="bg-white py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl sm:text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Simple no-tricks pricing</h2>
-      <p class="mt-6 text-lg leading-8 text-gray-600">Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.</p>
-    </div>
-    <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-      <div class="p-8 sm:p-10 lg:flex-auto">
-        <h3 class="text-2xl font-bold tracking-tight text-gray-900">Lifetime membership</h3>
-        <p class="mt-6 text-base leading-7 text-gray-600">Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis blanditiis repellendus etur quidem assumenda.</p>
-        <div class="mt-10 flex items-center gap-x-4">
-          <h4 class="flex-none text-sm font-semibold leading-6 text-indigo-600">What’s included</h4>
-          <div class="h-px flex-auto bg-gray-100"></div>
+
+<div class="max-w-full sm:mx-auto sm:px-6">
+  <div class="text-sm md:text-base grid grid-cols-2 lg:flex gap-1 md:gap-3">
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden hover:shadow-lg hover:scale-105 transform transition-all mb-4 w-full sm:my-8">
+      <div class="bg-[#184c6c] p-5">
+        <div class="sm:flex sm:items-start">
+          <svg width="64" height="64" fill="#0894ac" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.063 10.5H13.5a2.25 2.25 0 0 1-2.25-2.25V1.687a.188.188 0 0 0-.188-.187H6.75a3 3 0 0 0-3 3v15a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-8.813a.188.188 0 0 0-.188-.187ZM15.75 18h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Zm0-3.75h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Z"></path>
+            <path d="m19.65 8.839-6.74-6.741a.093.093 0 0 0-.16.066v6.085a.75.75 0 0 0 .75.75h6.085a.094.094 0 0 0 .066-.16Z"></path>
+          </svg>
+          <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+            <h3 class="text-sm leading-6 font-medium text-gray-300">Form DA</h3>
+            <p class="text-2xl md:text-3xl font-bold text-gray-300">{{dataDALength}}</p>
+          </div>
         </div>
-        <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
-          <li class="flex gap-x-3">
-            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-            </svg>
-            Private forum access
-          </li>
-          <li class="flex gap-x-3">
-            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-            </svg>
-            Member resources
-          </li>
-          <li class="flex gap-x-3">
-            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-            </svg>
-            Entry to annual conference
-          </li>
-          <li class="flex gap-x-3">
-            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-            </svg>
-            Official member t-shirt
-          </li>
-        </ul>
       </div>
-      <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-        <div class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-          <div class="mx-auto max-w-xs px-8">
-            <p class="text-base font-semibold text-gray-600">Pay once, own it forever</p>
-            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-              <span class="text-5xl font-bold tracking-tight text-gray-900">$349</span>
-              <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
-            </p>
-            <a href="#" class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get access</a>
-            <p>or</p>
-            <img class="mx-auto mt-12 h-48 w-48 rounded-lg border p-2 md:mt-0" src="https://i.imgur.com/FQS7fFC.png" alt="step" />
-            <p class="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company reimbursement</p>
+    </div>
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden hover:shadow-lg hover:scale-105 transform transition-all mb-4 w-full sm:my-8">
+      <div class="bg-[#184c6c] p-5">
+        <div class="sm:flex sm:items-start">
+          <svg width="64" height="64" fill="#0894ac" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.063 10.5H13.5a2.25 2.25 0 0 1-2.25-2.25V1.687a.188.188 0 0 0-.188-.187H6.75a3 3 0 0 0-3 3v15a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-8.813a.188.188 0 0 0-.188-.187ZM15.75 18h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Zm0-3.75h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Z"></path>
+            <path d="m19.65 8.839-6.74-6.741a.093.093 0 0 0-.16.066v6.085a.75.75 0 0 0 .75.75h6.085a.094.094 0 0 0 .066-.16Z"></path>
+          </svg>
+          <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+            <h3 class="text-sm leading-6 font-medium text-gray-300">Form ITCM</h3>
+            <p class="text-2xl md:text-3xl font-bold text-gray-300">{{dataITCMLength}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden hover:shadow-lg hover:scale-105 transform transition-all mb-4 w-full sm:my-8">
+      <div class="bg-[#184c6c] p-5">
+        <div class="sm:flex sm:items-start">
+          <svg width="64" height="64" fill="#0894ac" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.063 10.5H13.5a2.25 2.25 0 0 1-2.25-2.25V1.687a.188.188 0 0 0-.188-.187H6.75a3 3 0 0 0-3 3v15a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-8.813a.188.188 0 0 0-.188-.187ZM15.75 18h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Zm0-3.75h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Z"></path>
+            <path d="m19.65 8.839-6.74-6.741a.093.093 0 0 0-.16.066v6.085a.75.75 0 0 0 .75.75h6.085a.094.094 0 0 0 .066-.16Z"></path>
+          </svg>
+          <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+            <h3 class="text-sm leading-6 font-medium text-gray-400">BA ITCM</h3>
+            <p class="text-2xl md:text-3xl font-bold text-gray-300">{{dataBALength}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden hover:shadow-lg hover:scale-105 transform transition-all mb-4 w-full sm:my-8 ">
+      <div class="bg-[#184c6c] p-5">
+        <div class="sm:flex sm:items-start">
+          <svg width="64" height="64" fill="#0894ac" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.063 10.5H13.5a2.25 2.25 0 0 1-2.25-2.25V1.687a.188.188 0 0 0-.188-.187H6.75a3 3 0 0 0-3 3v15a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-8.813a.188.188 0 0 0-.188-.187ZM15.75 18h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Zm0-3.75h-7.5a.75.75 0 1 1 0-1.5h7.5a.75.75 0 1 1 0 1.5Z"></path>
+            <path d="m19.65 8.839-6.74-6.741a.093.093 0 0 0-.16.066v6.085a.75.75 0 0 0 .75.75h6.085a.094.094 0 0 0 .066-.16Z"></path>
+          </svg>
+          <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+            <h3 class="text-sm leading-6 font-medium text-gray-300">Hak Akses</h3>
+            <p class="text-2xl md:text-3xl font-bold text-gray-300">Kosong</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- <div class="">
+  <div class="relative space-y-8 md:space-y-0 md:flex md:flex-row-reverse h-screen border">
+    <img class="absolute bottom-0 right-0 w-64 hidden md:block z-0"
+      src="https://rekrutmenbersama2024.fhcibumn.id/assets/frontend/images/omni-right.svg" alt="">
+    <div class="flex justify-center items-center md:w-1/2 ">
+      <div class="h-auto w-full px-4">
+        <h1 class="py-6 text-3xl font-bold">“AINO Bikin Jadi Mudah”</h1>
+        <hr>
+        <p class="mt-4 py-4 leading-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime dolore rem non unde, veniam, veritatis minus modi assumenda blanditiis consectetur facilis aut ea architecto perferendis harum explicabo rerum alias eligendi?</p>
+
+        <h5 class="font-medium">Raih karir impianmu dengan belajar, bertumbuh dan
+          berkontribusi untuk Indonesia!
+        </h5>
+        <p class="mt-5 mb-3">
+          <i class="text-sky-700">#bikinjadimudah</i>
+        </p>
+
+        <button class="text-sm md:text-lg px-5 md:px-9 py-1 bg-gradient-to-r from-sky-200 to-sky-500 hover:bg-gradient-to-r hover:from-sky-300 hover:to-sky-600 p-4 rounded-full text-gray-50 hover:shadow-sm">Flow Hak Akses</button>
+      </div>
+    </div>
+    <div class="md:w-1/2"><img class="h-full w-full object-cover"
+        src="https://i.pinimg.com/474x/9e/89/d9/9e89d928b8d2d0edef485b245f1c9552.jpg" alt="" srcset=""></div>
+  </div>
+</div> -->
+
+<div class="bg-[#0894ac]  p-4 rounded-2xl shadow-2xl">
+  <div class="flex w-full">
+    <div class="w-1/2 my-auto px-16">
+      <!-- <div class="my-auto"> -->
+      <h1 class="text-[2.4rem] leading-10 font-bold text-white">Find the book you're looking for easier to read.</h1>
+      <p class="text-sm my-1 text-white">The most appropriate book site to reach books</p>
+      <button class="my-5 px-4 py-1 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium uppercase transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-800 duration-300">Start
+        the journey</button>
+      <!-- </div> -->
+    </div>
+    <div class="w-1/2">
+      <!-- <img src="https://i.pinimg.com/564x/ae/aa/00/aeaa00437541991d124b214e3406600d.jpg" alt=""> -->
+      <img src="https://rekrutmenbersama2024.fhcibumn.id/assets/frontend/images/saly-10.png" alt="">
+    </div>
+  </div>
+  </div>

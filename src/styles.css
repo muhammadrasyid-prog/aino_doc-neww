@@ -17,6 +17,14 @@
   border: none;
 }
 
+.style{
+  @apply bg-gradient-to-r from-gray-100 to-[#E3F4F4]
+}
+
+.text{
+  @apply text-black
+}
+
 /* 
 *{
   background-color: rgb(46, 140, 216);

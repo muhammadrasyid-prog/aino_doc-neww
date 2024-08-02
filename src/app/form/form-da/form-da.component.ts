@@ -479,17 +479,13 @@ export class FormDaComponent implements OnInit {
       .get(`${environment.apiUrl2}/dampak/analisa/${form_uuid}`)
       .then((response) => {
         this.isModalEditOpen = true;
-        console.log('woi');
-        
-        // console.log(response);
-        // $('#updateModalDA').modal('show');
         const formData = response.data;
         this.form_uuid = formData.form_uuid;
         this.form_number = formData.form_number;
         this.form_ticket = formData.form_ticket;
         this.form_status = formData.form_status;
         this.document_name = formData.document_name;
-        // this.project_uuid = formData.project_uuid;
+        this.project_uuid = formData.project_uuid;
         this.project_name = formData.project_name;
         this.nama_analis = formData.nama_analis;
         this.jabatan = formData.jabatan;
@@ -499,6 +495,14 @@ export class FormDaComponent implements OnInit {
         this.rencana_pengembangan_perubahan = formData.rencana_pengembangan_perubahan;
         this.rencana_pengujian_perubahan_sistem = formData.rencana_pengujian_perubahan_sistem;
         this.rencana_rilis_perubahan_dan_implementasi = formData.rencana_rilis_perubahan_dan_implementasi;
+          
+        const existingProject = this.dataListAllProject.find(
+          (project) => project.project_name === formData.project_name
+        );
+        this.project_uuid = existingProject ? existingProject.project_uuid : '';
+
+        console.log(this.rencana_pengembangan_perubahan);
+        
       })
       .catch((error) => {
         if (error.response.status === 500) {
@@ -540,10 +544,8 @@ export class FormDaComponent implements OnInit {
             jenis_perubahan: this.jenis_perubahan,
             detail_dampak_perubahan: this.detail_dampak_perubahan,
             rencana_pengembangan_perubahan: this.rencana_pengembangan_perubahan,
-            rencana_pengujian_perubahan_sistem:
-              this.rencana_pengujian_perubahan_sistem,
-            rencana_rilis_perubahan_dan_implementasi:
-              this.rencana_rilis_perubahan_dan_implementasi,
+            rencana_pengujian_perubahan_sistem: this.rencana_pengujian_perubahan_sistem,
+            rencana_rilis_perubahan_dan_implementasi: this.rencana_rilis_perubahan_dan_implementasi,
           },
         },
         {
@@ -608,12 +610,9 @@ export class FormDaComponent implements OnInit {
         this.departemen = formData.departemen;
         this.jenis_perubahan = formData.jenis_perubahan;
         this.detail_dampak_perubahan = formData.detail_dampak_perubahan;
-        this.rencana_pengembangan_perubahan =
-          formData.rencana_pengembangan_perubahan;
-        this.rencana_pengujian_perubahan_sistem =
-          formData.rencana_pengujian_perubahan_sistem;
-        this.rencana_rilis_perubahan_dan_implementasi =
-          formData.rencana_rilis_perubahan_dan_implementasi;
+        this.rencana_pengembangan_perubahan = formData.rencana_pengembangan_perubahan;
+        this.rencana_pengujian_perubahan_sistem = formData.rencana_pengujian_perubahan_sistem;
+        this.rencana_rilis_perubahan_dan_implementasi = formData.rencana_rilis_perubahan_dan_implementasi;
           this.isModalApproveOpen = true;
         // this.isModalOpen = true;
 

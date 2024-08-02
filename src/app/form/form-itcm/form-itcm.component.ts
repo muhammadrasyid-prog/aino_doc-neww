@@ -403,6 +403,11 @@ export class FormItcmComponent implements OnInit {
         this.tanggal = formData.tanggal;
         this.perubahan_aset = formData.perubahan_aset;
         this.deskripsi = formData.deskripsi;
+
+        const existingProject = this.dataListProject.find(
+          (project) => project.project_name === formData.project_name
+        );
+        this.project_uuid = existingProject ? existingProject.project_uuid : '';
       })
       .catch((error) => {
         if (error.response.status === 404 || error.response.status === 500) {
@@ -410,7 +415,10 @@ export class FormItcmComponent implements OnInit {
             title: 'Error',
             text: error.response.data.message,
             icon: 'error',
-            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+            showCancelButton: false,
+            showConfirmButton: false,
           });
         }
       });
@@ -421,40 +429,41 @@ export class FormItcmComponent implements OnInit {
   }
 
   updateFormITCM() {
-    axios
-      .put(
-        `${environment.apiUrl2}/api/form/itcm/update/${this.form_uuid}`,
-        {
-          formData: {
-            document_uuid: this.document_uuid,
-            form_ticket: this.form_ticket,
-            project_uuid: this.project_uuid,
-          },
-          data_itcm: {
-            no_da: this.no_da,
-            nama_pemohon: this.nama_pemohon,
-            instansi: this.instansi,
-            tanggal: this.tanggal,
-            perubahan_aset: this.perubahan_aset,
-            deskripsi: this.deskripsi,
-          },
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${this.cookieService.get('userToken')}`,
-          },
-        }
-      )
+    axios.put(`${environment.apiUrl2}/api/form/itcm/update/${this.form_uuid}`, {
+      formData: {
+        document_uuid: this.document_uuid,
+        form_ticket: this.form_ticket,
+        project_uuid: this.project_uuid,
+      },
+      data_itcm: {
+        no_da: this.no_da,
+        nama_pemohon: this.nama_pemohon,
+        instansi: this.instansi,
+        tanggal: this.tanggal,
+        perubahan_aset: this.perubahan_aset,
+        deskripsi: this.deskripsi
+      },
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${this.cookieService.get('userToken')}`
+      }
+    })
       .then((response) => {
         console.log(response.data.message);
         Swal.fire({
           title: 'Success',
           text: response.data.message,
           icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+          showCancelButton: false,
+          showConfirmButton: false,
         });
         this.fetchDataFormITCM();
         this.fetchDataAdminFormITCM();
         this.fetchDataUserFormITCM();
+        // $('#updateModalITCM').modal('hide');
       })
       .catch((error) => {
         if (error.response.status === 404 || error.response.status === 500) {
@@ -462,11 +471,14 @@ export class FormItcmComponent implements OnInit {
             title: 'Error',
             text: error.response.data.message,
             icon: 'error',
-            confirmButtonText: 'OK',
-          });
+            timer: 2000,
+            timerProgressBar: true,
+            showCancelButton: false,
+            showConfirmButton: false,
+          })
         }
       });
-      this.isModalAddOpen = false;
+      this.isModalEditOpen = false;
   }
 
   openApproveModal(form_uuid: string) {
@@ -533,6 +545,10 @@ export class FormItcmComponent implements OnInit {
           title: 'Success',
           text: response.data.message,
           icon: 'success',
+          timer: 2000,
+          timerProgressBar: true,
+          showCancelButton: false,
+          showConfirmButton: false,
         });
         this.fetchDataFormITCM();
         this.fetchDataAdminFormITCM();
@@ -544,7 +560,10 @@ export class FormItcmComponent implements OnInit {
             title: 'Error',
             text: error.response.data.message,
             icon: 'error',
-            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+            showCancelButton: false,
+            showConfirmButton: false,
           });
         }
       });
