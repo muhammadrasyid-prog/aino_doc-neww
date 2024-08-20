@@ -52,6 +52,20 @@
             <td class="px-6 py-4">{{ itemFormDA.project_name }}</td>
             <td class="px-6 py-4">{{ itemFormDA.departemen }}</td>
             <td class="px-6 py-4">{{ itemFormDA.jenis_perubahan }}</td>
+            <!-- <td class="px-6 py-4">
+              <p *ngIf="!isExpanded && itemFormDA.jenis_perubahan.length >= 30" class="line-clamp-3">
+                {{ itemFormDA.jenis_perubahan }}
+              </p>
+              <p *ngIf="isExpanded">
+                {{ itemFormDA.jenis_perubahan }}
+              </p>
+              <button *ngIf="itemFormDA.jenis_perubahan.length >= 30"
+                (click)="toggleJenisPerubahan()"
+                class="text-blue-500 hover:underline"
+              >
+                {{ isExpanded ? 'Hide' : 'Show More' }}
+              </button>
+            </td> -->
             <td class="px-6 py-4 ">
               <!-- <button type="button" (click)="openEditModal(itemFormDA.form_uuid)"
                 class="w-full focus:outline-none text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
@@ -272,19 +286,19 @@
 
       <div class="mt-4">
         <label for="description" class="text-sm md:text-base mb-1">Rencana Pengembangan Perubahan</label>
-        <input type="text" class="border text-sm rounded-xl p-2 px-3 w-full" name="rencana_pengembangan_perubahan"
+        <input type="date" class="border text-sm rounded-xl p-2 px-3 w-full" name="rencana_pengembangan_perubahan"
           placeholder="Masukkan Rencana Pengembangan Perubahan" [(ngModel)]="rencana_pengembangan_perubahan">
       </div>
 
       <div class="mt-4">
         <label for="description" class="text-sm md:text-base mb-1">Rencana Pengujian Perubahan Sistem</label>
-        <input type="text" class="border text-sm rounded-xl p-2 px-3 w-full" name="rencana_pengujian_perubahan_sistem"
+        <input type="date" class="border text-sm rounded-xl p-2 px-3 w-full" name="rencana_pengujian_perubahan_sistem"
           placeholder="Masukkan Pengujian Perubahan Sistem" [(ngModel)]="rencana_pengujian_perubahan_sistem">
       </div>
 
       <div class="mt-4">
         <label for="description" class="text-sm md:text-base mb-1">Rencana Rilis Perubahan dan Implementasi</label>
-        <input type="text" class="border text-sm rounded-xl p-2 px-3 w-full"
+        <input type="date" class="border text-sm rounded-xl p-2 px-3 w-full"
           name="rencana_rilis_perubahan_dan_implementasi"
           placeholder="Masukkan Rencana Rilis Perubahan dan Implementasi"
           [(ngModel)]="rencana_rilis_perubahan_dan_implementasi">
@@ -435,7 +449,7 @@
       <div class="mt-4">
         <label for="rencana_pengembangan_perubahan" class="text-sm md:text-base mb-1">Rencana Pengembangan
           Perubahan</label>
-        <input type="text" name="rencana_pengembangan_perubahan" id="rencana_pengembangan_perubahan"
+        <input type="date" name="rencana_pengembangan_perubahan" id="rencana_pengembangan_perubahan"
           placeholder="Masukkan Rencana Pengembangan Perubahan" [(ngModel)]="rencana_pengembangan_perubahan"
           class="border text-sm rounded-xl p-2 px-3 w-full">
       </div>
@@ -443,7 +457,7 @@
       <div class="mt-4">
         <label for="rencana_pengujian_perubahan_sistem" class="text-sm md:text-base mb-1">Rencana Pengujian Perubahan
           Sistem</label>
-        <input type="text" name="rencana_pengujian_perubahan_sistem" id="rencana_pengujian_perubahan_sistem"
+        <input type="date" name="rencana_pengujian_perubahan_sistem" id="rencana_pengujian_perubahan_sistem"
           placeholder="Masukkan Pengujian Perubahan Sistem" [(ngModel)]="rencana_pengujian_perubahan_sistem"
           class="border text-sm rounded-xl p-2 px-3 w-full">
       </div>
@@ -531,14 +545,14 @@
 
 <!-- Approve MODAL -->
 <div *ngIf="isModalApproveOpen" tabindex="-1" aria-hidden="true"
-  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
   <div
-    class="relative p w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    class="relative w-full max-w-4xl bg-white rounded-lg shadow-lg dark:bg-gray-800 max-h-[90vh] overflow-auto mx-4 md:mx-6">
     <!-- Modal header -->
     <div
-      class="sticky top-0 flex items-center justify-between p-2 md:p-4 border-b rounded-t bg-white dark:border-gray-600">
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-        Approval
+      class="flex items-center justify-between p-4 border-b rounded-t bg-gray-100 dark:bg-gray-700">
+      <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Approval Data
       </h3>
       <button (click)="closeApproveModal()"
         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -550,89 +564,73 @@
       </button>
     </div>
     <!-- Modal body -->
-    <form #detailForm="ngForm">
-      <div class="px-2 md:px-10 py-2 md:py-4  mx-auto">
-        <table class="w-full mb-8">
-          <tbody class="">
-            <tr>
-              <td class="text-left text-gray-700">No. Tiket</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ form_ticket }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Status</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ form_status }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">No. Formulir</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ form_number }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Nama Dokumen</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ document_name }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Nama Project</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ project_name }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Status Approval</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ approval_status }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Alasan Tidak Approve</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ reason }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Nama Analis</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ nama_analis }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Jabatan</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ jabatan }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Departemen</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ departemen}}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Jenis Perubahan</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ jenis_perubahan }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Detail Dampak Perubahan</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ detail_dampak_perubahan }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Rencana pengembangan perubahan</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ rencana_pengembangan_perubahan }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Rencana pengujian perubahan sistem</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ rencana_pengujian_perubahan_sistem }}</td>
-            </tr>
-            <tr>
-              <td class="text-left text-gray-700">Rencana rilis perubahan dan implementasi</td>
-              <td class="px-2 text-center">:</td>
-              <td class="text-left text-gray-700">{{ rencana_rilis_perubahan_dan_implementasi}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>sing</p>
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">No. Formulir</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ form_number }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">No. Tiket</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ form_ticket }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Dokumen</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ document_name }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Projek</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ project_name }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Departemen</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ departemen }}</div>
+        </div>
+        <!-- Jenis Perubahan -->
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Jenis Perubahan</div>
+          <div class="text-gray-900 dark:text-gray-100">
+            <p *ngIf="!isJenisPerubahanExpanded" class="line-clamp-3">
+              {{ jenis_perubahan }}
+            </p>
+            <p *ngIf="isJenisPerubahanExpanded">
+              {{ jenis_perubahan }}
+            </p>
+            <button *ngIf="jenis_perubahan.length > 30"
+            (click)="toggleJenisPerubahan()" class="text-blue-500 hover:underline">
+              {{ isJenisPerubahanExpanded ? 'Hide' : 'Show More' }}
+            </button>
+          </div>
+        </div>
+        <!-- Detail Dampak Perubahan -->
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Detail Dampak Perubahan</div>
+          <div class="text-gray-900 dark:text-gray-100">
+            <p *ngIf="!isDetailDampakExpanded" class="line-clamp-3">
+              {{ detail_dampak_perubahan }}
+            </p>
+            <p *ngIf="isDetailDampakExpanded">
+              {{ detail_dampak_perubahan }}
+            </p>
+            <button *ngIf="detail_dampak_perubahan.length > 30"
+             (click)="toggleDetailDampak()" class="text-blue-500 hover:underline">
+              {{ isDetailDampakExpanded ? 'Hide' : 'Show More' }}
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Rencana Pengembangan Perubahan</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ rencana_pengembangan_perubahan }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Rencana Pengujian Perubahan Sistem</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ rencana_pengujian_perubahan_sistem }}</div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold text-gray-700 dark:text-gray-300">Rencana Rilis Perubahan dan Implementasi</div>
+          <div class="text-gray-900 dark:text-gray-100">{{ rencana_rilis_perubahan_dan_implementasi }}</div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>

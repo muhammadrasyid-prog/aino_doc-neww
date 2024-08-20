@@ -131,6 +131,8 @@ export class FormItcmComponent implements OnInit {
   isModalEditOpen: boolean = false;
   isModalApproveOpen: boolean = false;
 
+  activePopover: number | null = null;
+
   constructor(
     private cookieService: CookieService,
     private fb: FormBuilder,
@@ -567,6 +569,14 @@ export class FormItcmComponent implements OnInit {
           });
         }
       });
+  }
+
+  togglePopover(index: number) {
+    if (this.activePopover === index) {
+      this.activePopover = null;
+    } else {
+      this.activePopover = index;
+    }
   }
 }
 

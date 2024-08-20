@@ -154,6 +154,8 @@ export class FormDaComponent implements OnInit {
   isModalAddOpen: boolean = false;
   isModalEditOpen: boolean = false;
   isModalApproveOpen: boolean = false;
+  isJenisPerubahanExpanded = false;
+  isDetailDampakExpanded = false;
 
   constructor(
     private cookieService: CookieService,
@@ -647,6 +649,14 @@ export class FormDaComponent implements OnInit {
           console.error(error);
         }
       });
+  }
+
+  toggleJenisPerubahan() {
+    this.isJenisPerubahanExpanded = !this.isJenisPerubahanExpanded;
+  }
+
+  toggleDetailDampak() {
+    this.isDetailDampakExpanded = !this.isDetailDampakExpanded;
   }
 
   
