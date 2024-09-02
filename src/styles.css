@@ -18,7 +18,7 @@
 }
 
 .style{
-  @apply bg-gradient-to-tr from-gray-100 to-[#E3F4F4]
+  @apply bg-gradient-to-tr from-gray-100 to-[#e3f4f4]
 }
 
 .text{
