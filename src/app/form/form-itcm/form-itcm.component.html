@@ -115,20 +115,12 @@
               <td class="px-6 py-4">{{ itemFormITCM.form_status }}</td>
               <td class="px-6 py-4">{{ itemFormITCM.approval_status }}</td>
               <td class="px-6 py-4 ">
+              <!-- Button Popover -->
                 <div class="relative">
-                  <button (click)="togglePopover(x)" data-popover-target="popover-click" data-popover-trigger="click" type="button" class="flex items-center justify-center w-12 h-12 hover:bg-gray-400 text-white rounded-full">
-                    <svg width="46" height="46" fill="#484747" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
-                      <path d="M6 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
-                      <path d="M18 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
-                    </svg>
+                  <button (click)="togglePopover($event, x)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Actions
                   </button>
-        
-                  <div *ngIf="activePopover === x" 
-                       class="absolute right-full top-0 mr-2 w-44 bg-white shadow-lg z-10">
-                    <div class="px-3 py-2 bg-gray-100">
-                      <h3 class="font-semibold text-gray-900 dark:text-white">Actions</h3>
-                    </div>
+                  <div *ngIf="popoverIndex === x" class="popover-content absolute z-10 bg-white shadow-lg rounded mt-2 right-0 w-48">
                       <div class="py-2">
                         <button (click)="openEditModal(itemFormITCM.form_uuid)" class="w-full flex items-center text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white transition duration-150 ease-in-out">
                           <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"

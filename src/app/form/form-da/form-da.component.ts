@@ -53,6 +53,14 @@ interface Users {
   personal_name: string;
 }
 
+interface Signatory {
+  sign_uuid: string;
+  signatory_name: string;
+  signatory_position: string;
+  role_sign: string;
+  is_sign: boolean;
+  }
+
 interface Detail {
   form_number: string;
   form_ticket: string;
@@ -147,7 +155,16 @@ export class FormDaComponent implements OnInit {
   roleSign2: string = 'Atasan Pemohon';
   roleSign3: string = 'Penerima';
   roleSign4: string = 'Atasan Penerima';
-  roleSign5: string = 'Atasan Pemohon';
+  // roleSign5: string = 'Atasan Pemohon';
+
+  signatoryPosition: {
+    [key: string]: { name: string; position: string; is_sign: boolean };
+  } = {
+    Pemohon: { name: '', position: '', is_sign: false },
+    'Atasan Pemohon': { name: '', position: '', is_sign: false },
+    Penerima: { name: '', position: '', is_sign: false },
+    'Atasan Penerima': { name: '', position: '', is_sign: false },
+  };
 
   dataListFormDADetail: Detail[] = [];
 
@@ -361,20 +378,20 @@ export class FormDaComponent implements OnInit {
     this.rencana_rilis_perubahan_dan_implementasi = '';
     this.name1 = '';
     this.position1 = '';
-    this.roleSign1 = '';
+    this.roleSign1 = this.roleSign1;
     this.name2 = '';
     this.position2 = '';
-    this.roleSign2 = '';
+    this.roleSign2 = this.roleSign2;
     this.name3 = '';
     this.position3 = '';
-    this.roleSign3 = '';
+    this.roleSign3 = this.roleSign3;
     this.name4 = '';
     this.position4 = '';
-    this.roleSign4 = '';
-    this.name5 = '';
-    this.position5 = '';
-    this.roleSign5 = '';
-    console.log('woi');
+    this.roleSign4 = this.roleSign4;
+    // this.name5 = '';
+    // this.position5 = '';
+    // this.roleSign5 = '';
+    // console.log('woi');
     
   }
   closeAddModal() {
@@ -384,7 +401,7 @@ export class FormDaComponent implements OnInit {
   addFormDA(): void {
     const token = this.cookieService.get('userToken');
     console.log('Document UUID:', this.document_uuid);
-
+  
     const requestDataFormDA = {
       isPublished: false,
       formData: {
@@ -399,10 +416,8 @@ export class FormDaComponent implements OnInit {
         jenis_perubahan: this.jenis_perubahan,
         detail_dampak_perubahan: this.detail_dampak_perubahan,
         rencana_pengembangan_perubahan: this.rencana_pengembangan_perubahan,
-        rencana_pengujian_perubahan_sistem:
-          this.rencana_pengujian_perubahan_sistem,
-        rencana_rilis_perubahan_dan_implementasi:
-          this.rencana_rilis_perubahan_dan_implementasi,
+        rencana_pengujian_perubahan_sistem: this.rencana_pengujian_perubahan_sistem,
+        rencana_rilis_perubahan_dan_implementasi: this.rencana_rilis_perubahan_dan_implementasi,
       },
       signatories: [
         {
@@ -425,15 +440,11 @@ export class FormDaComponent implements OnInit {
           position: this.position4,
           role_sign: this.roleSign4,
         },
-        {
-          name: this.name5,
-          postion: this.position5,
-          role_sign: this.roleSign5,
-        },
       ],
     };
-
-    console.log(this.document_uuid);
+  
+    console.log('Request Data:', requestDataFormDA);
+  
     axios
       .post(`${environment.apiUrl2}/api/add/da`, requestDataFormDA, {
         headers: {
@@ -453,15 +464,10 @@ export class FormDaComponent implements OnInit {
         this.fetchDataFormDA();
         this.fetchDataAdminFormDA();
         this.fetchDataUserFormDA();
-        console.log('rencana', this.rencana_pengembangan_perubahan);
       })
       .catch((error) => {
         console.log(error.response.data.message);
-        if (
-          error.response.status === 401 ||
-          error.response.status === 500 ||
-          error.response.status === 400
-        ) {
+        if (error.response.status === 401 || error.response.status === 500 || error.response.status === 400) {
           Swal.fire({
             icon: 'error',
             title: 'ERROR',
@@ -475,13 +481,16 @@ export class FormDaComponent implements OnInit {
       });
     this.isModalAddOpen = false;
   }
-
+  
   openEditModal(form_uuid: string) {
     axios
-      .get(`${environment.apiUrl2}/dampak/analisa/${form_uuid}`)
+      .get(`${environment.apiUrl2}/da/${form_uuid}`)
       .then((response) => {
+        console.log('edit dam:', response.data);
         this.isModalEditOpen = true;
-        const formData = response.data;
+        const formData = response.data.form;
+  
+        // Update component properties with the fetched data
         this.form_uuid = formData.form_uuid;
         this.form_number = formData.form_number;
         this.form_ticket = formData.form_ticket;
@@ -497,29 +506,36 @@ export class FormDaComponent implements OnInit {
         this.rencana_pengembangan_perubahan = formData.rencana_pengembangan_perubahan;
         this.rencana_pengujian_perubahan_sistem = formData.rencana_pengujian_perubahan_sistem;
         this.rencana_rilis_perubahan_dan_implementasi = formData.rencana_rilis_perubahan_dan_implementasi;
-          
+
+        const signData: Signatory[] = response.data.signatories;
+        signData.forEach((sign: Signatory) => {
+          const role = sign.role_sign;
+          if (this.signatoryPosition[role]) {
+            this.signatoryPosition[role].name = sign.signatory_name;
+            this.signatoryPosition[role].position = sign.signatory_position;
+            this.signatoryPosition[role].is_sign = sign.is_sign;
+          }
+        });
+
+        // console.log('Initial signPosition:', this.signatoryPosition);
+
+        console.log('Sign data:', signData);
+        console.log('Form data:', formData);
+        
+        
+        // Ensure the project UUID is set correctly
         const existingProject = this.dataListAllProject.find(
           (project) => project.project_name === formData.project_name
         );
         this.project_uuid = existingProject ? existingProject.project_uuid : '';
-
-        console.log(this.rencana_pengembangan_perubahan);
-        
+  
+        // Log data to ensure it is correctly assigned
+        console.log(this.form_ticket, this.project_uuid, this.nama_analis, this.jabatan, this.departemen);
       })
       .catch((error) => {
-        if (error.response.status === 500) {
-          Swal.fire({
-            title: 'Error',
-            text: error.response.data.message,
-            icon: 'error',
-            timer: 2000,
-            timerProgressBar: true,
-            showCancelButton: false,
-            showConfirmButton: false,
-          });
-        } else {
-          console.log(error.response.data);
-        }
+        console.log(error.response.data);
+        // TODO: Tambahkan penanganan error yang lebih baik di sini
+        // Contoh: menampilkan pesan error ke pengguna
       });
   }
 
@@ -530,6 +546,48 @@ export class FormDaComponent implements OnInit {
     this.isModalEditOpen = false;
   }
   updateFormDA() {
+    // Logging untuk memeriksa nilai sebelum mengirim request
+    console.log('Signatories:', {
+      name1: this.name1,
+      position1: this.position1,
+      roleSign1: this.roleSign1,
+      name2: this.name2,
+      position2: this.position2,
+      roleSign2: this.roleSign2,
+      name3: this.name3,
+      position3: this.position3,
+      role_sign3: this.roleSign3,
+      name4: this.name4,
+      position4: this.position4,
+      role_sign4: this.roleSign4,
+      // Tambahkan logging untuk name3 dan name4 juga
+    });
+  
+    const signatories = [
+      {
+        name: this.name1,
+        position: this.position1,
+        role_sign: this.roleSign1,
+      },
+      {
+        name: this.name2,
+        position: this.position2,
+        role_sign: this.roleSign2,
+      },
+      {
+        name: this.name3,
+        position: this.position3,
+        role_sign: this.roleSign3,
+      },
+      {
+        name: this.name4,
+        position: this.position4,
+        role_sign: this.roleSign4,
+      },
+    ];
+  
+    console.log('Prepared Signatories Data:', signatories);
+  
     axios
       .put(
         `${environment.apiUrl2}/api/dampak/analisa/update/${this.form_uuid}`,
@@ -549,6 +607,7 @@ export class FormDaComponent implements OnInit {
             rencana_pengujian_perubahan_sistem: this.rencana_pengujian_perubahan_sistem,
             rencana_rilis_perubahan_dan_implementasi: this.rencana_rilis_perubahan_dan_implementasi,
           },
+          signatories: signatories,
         },
         {
           headers: {
@@ -557,6 +616,7 @@ export class FormDaComponent implements OnInit {
         }
       )
       .then((response) => {
+        console.log('Update berhasil. Signatories:', signatories); 
         Swal.fire({
           icon: 'success',
           title: 'SUCCESS',

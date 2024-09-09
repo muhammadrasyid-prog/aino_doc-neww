@@ -1,0 +1,38 @@
+/* Mengatur background dan warna untuk tooltip Shepherd */
+  .shepherd-element {
+    @apply bg-white text-gray-900 border border-gray-300 rounded-lg;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  /* Mengatur warna dan padding untuk tombol Shepherd */
+  .shepherd-button {
+    @apply bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded;
+  }
+  
+  /* Mengatur styling khusus untuk pointer Shepherd */
+  .shepherd-arrow {
+    @apply text-blue-500;
+  }
+  
+  /* Mengatur shadow dan transformasi untuk langkah Shepherd */
+  .shepherd-step {
+    @apply shadow-lg transform scale-105 transition-transform duration-300;
+  }
+  
+  .shepherd-element {
+    z-index: 9999;
+  }
+
+  .shepherd-element.shepherd-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .shepherd-element {
+    position: fixed !important;
+    display: none !important;
+  }
+
+  .shepherd-hidden {
+    display: none !important;
+  }

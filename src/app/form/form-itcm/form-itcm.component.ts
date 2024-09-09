@@ -131,7 +131,7 @@ export class FormItcmComponent implements OnInit {
   isModalEditOpen: boolean = false;
   isModalApproveOpen: boolean = false;
 
-  activePopover: number | null = null;
+  popoverIndex: number | null = null;
 
   constructor(
     private cookieService: CookieService,
@@ -571,13 +571,36 @@ export class FormItcmComponent implements OnInit {
       });
   }
 
-  togglePopover(index: number) {
-    if (this.activePopover === index) {
-      this.activePopover = null;
-    } else {
-      this.activePopover = index;
+// popoverIndex: number | null = null;
+
+togglePopover(event: Event, index: number): void {
+  event.stopPropagation(); // Menghentikan event bubbling
+  if (this.popoverIndex === index) {
+    this.popoverIndex = null; // Tutup popover jika diklik lagi
+  } else {
+    this.popoverIndex = index; // Buka popover untuk baris ini
+  }
+}
+
+closePopover() {
+  this.popoverIndex = null;
+}
+
+@HostListener('document:click', ['$event'])
+onClickOutside(event: Event): void {
+  if (this.popoverIndex !== null) {
+    const clickedElement = event.target as HTMLElement;
+    const popoverElement = document.querySelector('.popover-content');
+    if (popoverElement && !popoverElement.contains(clickedElement)) {
+      this.closePopover();
     }
   }
+}
+
+handleAction(action: string, item: any): void {
+  console.log(`Handling ${action} for:`, item);
+  this.closePopover();
+}
 }
 
 export { formsITCM };
