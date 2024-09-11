@@ -1,4 +1,4 @@
-<h1 class="py-3 text-center text-3xl font-semibold text-gray-800">Form ITCM</h1>
+<h1 id="header-itcm" class="py-3 text-center text-3xl font-semibold text-gray-800">Form ITCM</h1>
 <div class="flex w-full pb-4 px-2 bg-white">
   <label for="table-search" class="sr-only">Search</label>
   <div class="relative">
@@ -10,11 +10,11 @@
           clip-rule="evenodd"></path>
       </svg>
     </div>
-    <input type="text" id="table-search" [(ngModel)]="searchText" name="searchText"
+    <input type="text" id="table-search-itcm" [(ngModel)]="searchText" name="searchText"
       class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 md:w-64 sm:w-40 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
       placeholder="Search for items">
   </div>
-  <button type="button" (click)="openAddModal()" *ngIf="role_code === 'A' || role_code === 'M'"
+  <button id="add-itcm" type="button" (click)="openAddModal()" *ngIf="role_code === 'A' || role_code === 'M'"
     class="ml-auto text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-2 py-1 md:px-5 md:py-2.5 text-center inline-flex items-center">
     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden md:block"
       stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import axios from 'axios';
 import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
@@ -9,11 +10,11 @@ import Shepherd from 'shepherd.js'; // Import Shepherd dari shepherd.js
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   dataDALength: any;
   dataITCMLength: any;
   dataBALength: any;
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fetchDataFormITCM();
     this.fetchAllDataBA();
     this.startAutoSlide();
-    this.startTour();
+    // this.startTour();
   }
 
   fetchDataFormDA(): void {
@@ -120,157 +121,157 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.startAutoSlide();
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.initTour();
-    }, 500);
-  }
+  // ngAfterViewInit() {
+  //   setTimeout(() => {
+  //     this.initTour();
+  //   }, 500);
+  // }
   
-  initTour() {
-    if (this.tour) {
-      this.tour.complete();
-    }
+  // initTour() {
+  //   if (this.tour) {
+  //     this.tour.complete();
+  //   }
   
-    this.tour = new Shepherd.Tour({
-      defaultStepOptions: {
-        classes: 'shepherd-theme-default',
-        scrollTo: { behavior: 'smooth', block: 'center' },
-      },
-      useModalOverlay: true,
-    });
+  //   this.tour = new Shepherd.Tour({
+  //     defaultStepOptions: {
+  //       classes: 'shepherd-theme-default',
+  //       scrollTo: { behavior: 'smooth', block: 'center' },
+  //     },
+  //     useModalOverlay: true,
+  //   });
   
-    this.addTourSteps();
-    this.startTour();
-  }
+  //   this.addTourSteps();
+  //   this.startTour();
+  // }
   
-  addTourSteps() {
-    if (!this.tour) return;
+  // addTourSteps() {
+  //   if (!this.tour) return;
   
-    this.tour.addSteps([
-      {
-        id: 'form-da-step',
-        text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
-        attachTo: {
-          element: '#form-da',
-          on: 'bottom'
-        },
-        scrollTo: { behavior: 'smooth', block: 'center' },
-        modalOverlayOpeningPadding: 8,
-        modalOverlayOpeningRadius: 4,
-        buttons: [
-          {
-            text: 'Next',
-            action: () => {
-              this.tour?.next();
-            }
-          },
-          {
-            text: 'Cancel',
-            action: () => {
-              this.tour?.cancel();
-            }
-          }
-        ]
-      },
-      {
-        id: 'form-itcm-step',
-        text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
-        attachTo: {
-          element: '#form-itcm',
-          on: 'bottom'
-        },
-        scrollTo: { behavior: 'smooth', block: 'center' },
-        modalOverlayOpeningPadding: 8,
-        modalOverlayOpeningRadius: 4,
-        buttons: [
-          {
-            text: 'Next',
-            action: () => {
-              this.tour?.next();
-            }
-          },
-          {
-            text: 'back',
-            action: () => {
-              this.tour?.back();
-            }
-          }
-        ]
-      },
-      {
-        id: 'form-da-step',
-        text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
-        attachTo: {
-          element: '#form-ba',
-          on: 'bottom'
-        },
-        scrollTo: { behavior: 'smooth', block: 'center' },
-        modalOverlayOpeningPadding: 8,
-        modalOverlayOpeningRadius: 4,
-        buttons: [
-          {
-            text: 'Next',
-            action: () => {
-              this.tour?.next();
-            }
-          },
-          {
-            text: 'Back',
-            action: () => {
-              this.tour?.back();
-            }
-          }
-        ]
-      },
-      // ... (langkah-langkah lainnya dengan pola yang sama)
-      {
-        id: 'form-hak-akses-step',
-        text: 'Ini adalah langkah keempat dalam tour Anda.',
-        attachTo: {
-          element: '#form-hak-akses',
-          on: 'bottom'
-        },
-        scrollTo: { behavior: 'smooth', block: 'center' },
-        modalOverlayOpeningPadding: 8,
-        modalOverlayOpeningRadius: 4,
-        buttons: [
-          {
-            text: 'Finish',
-            action: () => {
-              this.closeTour();
-            }
-          },
-          {
-            text: 'Back',
-            action: () => {
-              this.tour?.back();
-            }
-          }
-        ]
-      }
-    ]);
-  }
+  //   this.tour.addSteps([
+  //     {
+  //       id: 'form-da-step',
+  //       text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
+  //       attachTo: {
+  //         element: '#form-da',
+  //         on: 'bottom'
+  //       },
+  //       scrollTo: { behavior: 'smooth', block: 'center' },
+  //       modalOverlayOpeningPadding: 8,
+  //       modalOverlayOpeningRadius: 4,
+  //       buttons: [
+  //         {
+  //           text: 'Next',
+  //           action: () => {
+  //             this.tour?.next();
+  //           }
+  //         },
+  //         {
+  //           text: 'Cancel',
+  //           action: () => {
+  //             this.tour?.cancel();
+  //           }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'form-itcm-step',
+  //       text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
+  //       attachTo: {
+  //         element: '#form-itcm',
+  //         on: 'bottom'
+  //       },
+  //       scrollTo: { behavior: 'smooth', block: 'center' },
+  //       modalOverlayOpeningPadding: 8,
+  //       modalOverlayOpeningRadius: 4,
+  //       buttons: [
+  //         {
+  //           text: 'Next',
+  //           action: () => {
+  //             this.tour?.next();
+  //           }
+  //         },
+  //         {
+  //           text: 'back',
+  //           action: () => {
+  //             this.tour?.back();
+  //           }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'form-da-step',
+  //       text: 'Ini adalah Form DA. Di sini Anda dapat melihat jumlah data yang terdaftar.',
+  //       attachTo: {
+  //         element: '#form-ba',
+  //         on: 'bottom'
+  //       },
+  //       scrollTo: { behavior: 'smooth', block: 'center' },
+  //       modalOverlayOpeningPadding: 8,
+  //       modalOverlayOpeningRadius: 4,
+  //       buttons: [
+  //         {
+  //           text: 'Next',
+  //           action: () => {
+  //             this.tour?.next();
+  //           }
+  //         },
+  //         {
+  //           text: 'Back',
+  //           action: () => {
+  //             this.tour?.back();
+  //           }
+  //         }
+  //       ]
+  //     },
+  //     // ... (langkah-langkah lainnya dengan pola yang sama)
+  //     {
+  //       id: 'form-hak-akses-step',
+  //       text: 'Ini adalah langkah keempat dalam tour Anda.',
+  //       attachTo: {
+  //         element: '#form-hak-akses',
+  //         on: 'bottom'
+  //       },
+  //       scrollTo: { behavior: 'smooth', block: 'center' },
+  //       modalOverlayOpeningPadding: 8,
+  //       modalOverlayOpeningRadius: 4,
+  //       buttons: [
+  //         {
+  //           text: 'Finish',
+  //           action: () => {
+  //             this.closeTour();
+  //           }
+  //         },
+  //         {
+  //           text: 'Back',
+  //           action: () => {
+  //             this.tour?.back();
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   ]);
+  // }
   
-  startTour() {
-    if (this.tour) {
-      this.tour.start();
-    }
-  }
+  // startTour() {
+  //   if (this.tour) {
+  //     this.tour.start();
+  //   }
+  // }
 
-  closeTour() {
-    if (this.tour) {
-      this.tour.complete();
-      const shepherdElements = document.querySelectorAll('.shepherd-element');
-      shepherdElements.forEach(el => {
-        (el as HTMLElement).style.display = 'none';
-      });
-      const overlay = document.querySelector('.shepherd-modal-overlay-container');
-      if (overlay) {
-        overlay.remove();
-      }
-      this.tour = null;
-    }
-  }
+  // closeTour() {
+  //   if (this.tour) {
+  //     this.tour.complete();
+  //     const shepherdElements = document.querySelectorAll('.shepherd-element');
+  //     shepherdElements.forEach(el => {
+  //       (el as HTMLElement).style.display = 'none';
+  //     });
+  //     const overlay = document.querySelector('.shepherd-modal-overlay-container');
+  //     if (overlay) {
+  //       overlay.remove();
+  //     }
+  //     this.tour = null;
+  //   }
+  // }
   
   // startTour() {
   //   const tour = new Shepherd.Tour({

@@ -560,8 +560,24 @@ export class FormDaComponent implements OnInit {
       name4: this.name4,
       position4: this.position4,
       role_sign4: this.roleSign4,
-      // Tambahkan logging untuk name3 dan name4 juga
     });
+
+    console.log('Form Data:', {
+      document_uuid: this.document_uuid,
+      form_ticket: this.form_ticket,
+      project_uuid: this.project_uuid,
+    });
+    
+    console.log('Data DA:', {
+      nama_analis: this.nama_analis,
+      jabatan: this.jabatan,
+      departemen: this.departemen,
+      jenis_perubahan: this.jenis_perubahan,
+      detail_dampak_perubahan: this.detail_dampak_perubahan,
+      rencana_pengembangan_perubahan: this.rencana_pengembangan_perubahan,
+      rencana_pengujian_perubahan_sistem: this.rencana_pengujian_perubahan_sistem,
+      rencana_rilis_perubahan_dan_implementasi: this.rencana_rilis_perubahan_dan_implementasi,
+    });    
   
     const signatories = [
       {
